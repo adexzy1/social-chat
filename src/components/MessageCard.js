@@ -1,10 +1,15 @@
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import avatar from '../assets/avatar.png';
 
 const MessageCard = ({ name, message }) => {
   const { userName } = useSelector((state) => state.messages);
-
+  const ref = useRef(null);
   const isUserMessage = userName === name;
+
+  useEffect(() => {
+    ref.current.scrollIntoView({ behaviour: 'smooth' });
+  }, []);
 
   return (
     <div
@@ -25,6 +30,7 @@ const MessageCard = ({ name, message }) => {
           {message}
         </div>
       </section>
+      <div ref={ref}></div>
     </div>
   );
 };
