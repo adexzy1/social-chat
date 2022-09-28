@@ -1,57 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const username = sessionStorage.getItem('username');
+let messagesInLocalStorage = JSON.parse(localStorage.getItem('messages'));
+
 const initialState = {
-  messages: [
-    {
-      name: 'John Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Michael Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Jane Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Erick Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Machela Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Machela Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Jane Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Machela Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Jane Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Machela Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Machela Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-    {
-      name: 'Jane Doe',
-      message: ' hey there in am new here i would love to meet you all',
-    },
-  ],
-  userName: 'Jane Doe',
+  messages: messagesInLocalStorage ? messagesInLocalStorage : [],
+  userName: username ? username : '',
 };
 
 const messagesSlice = createSlice({
@@ -59,10 +13,23 @@ const messagesSlice = createSlice({
   initialState,
   reducers: {
     setUserName: (state, { payload }) => {
+      sessionStorage.setItem('username', payload);
       state.userName = payload;
+    },
+
+    saveMessages: (state, { payload }) => {
+      const message = { name: state.userName, message: payload };
+      state.messages = [...state.messages, message];
+      localStorage.setItem('messages', JSON.stringify([...state.messages]));
+    },
+
+    updateMessages: (state, { payload }) => {
+      const messages = JSON.parse(payload);
+      state.messages = [...messages];
     },
   },
 });
 
-export const { setUserName } = messagesSlice.actions;
+export const { setUserName, saveMessages, updateMessages } =
+  messagesSlice.actions;
 export default messagesSlice.reducer;
