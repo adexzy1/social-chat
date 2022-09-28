@@ -7,6 +7,7 @@ module.exports = {
         black: {
           DEFAULT: '#040505',
           light: 'rgba(163, 162, 170,0.1)',
+          50: 'rgba(163, 162, 170,0.3)',
         },
       },
     },
