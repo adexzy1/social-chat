@@ -1,13 +1,28 @@
+import { useSelector } from 'react-redux';
 import avatar from '../assets/avatar.png';
 
-const MessageCard = () => {
+const MessageCard = ({ name, message }) => {
+  const { userName } = useSelector((state) => state.messages);
+
+  const isUserMessage = userName === name;
+
   return (
-    <div className="pt-5 flex gap-3">
+    <div
+      className={`pt-5 flex gap-3 ${
+        isUserMessage && 'flex-nowrap flex-row-reverse'
+      }`}
+    >
       <img src={avatar} alt="avatar" className="w-10 h-10 rounded-lg" />
       <section className="text-sm">
-        <p className="">John Doe</p>
-        <div className="mt-3 py-2 pl-5 pr-2 bg-black-50 rounded-r-full rounded-bl-full">
-          hey there in am new here i would love to meet you all
+        <p className={isUserMessage ? 'text-right' : 'text-left'}>{name}</p>
+        <div
+          className={`mt-2 py-2 px-5 bg-black-50  ${
+            isUserMessage
+              ? 'rounded-l-full rounded-br-full bg-purple-500'
+              : 'rounded-r-full rounded-bl-full'
+          }`}
+        >
+          {message}
         </div>
       </section>
     </div>
