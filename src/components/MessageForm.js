@@ -2,10 +2,13 @@ import React from 'react';
 
 const MessageForm = () => {
   return (
-    <form className="fixed bottom-0 bg-black-light w-[80%] mx-auto border-purple-500 border-t text-white h-12">
-      <div>
-        <input type="text" className="bg-transparent" />
-        <button>send</button>
+    <form className="fixed bottom-0 left-0 w-full mb-3">
+      <div className="mx-3 bg-black-light text-white flex rounded-md py-2 pr-3">
+        <input
+          type="text"
+          className="bg-transparent flex-1 outline-none px-3"
+        />
+        <button className="bg-purple-500 p-2 px-4  rounded-md">send</button>
       </div>
     </form>
   );
