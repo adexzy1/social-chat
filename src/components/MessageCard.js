@@ -1,8 +1,7 @@
-import { forwardRef } from 'react';
 import { useSelector } from 'react-redux';
 import avatar from '../assets/avatar.png';
 
-const MessageCard = forwardRef(({ name, message }, ref) => {
+const MessageCard = ({ name, message }) => {
   const { userName } = useSelector((state) => state.messages);
   const isUserMessage = userName === name;
 
@@ -11,7 +10,6 @@ const MessageCard = forwardRef(({ name, message }, ref) => {
       className={`pt-5 flex gap-3 ${
         isUserMessage && 'flex-nowrap flex-row-reverse'
       }`}
-      ref={ref}
     >
       <img src={avatar} alt="avatar" className="w-10 h-10 rounded-lg" />
       <section className="text-sm">
@@ -30,6 +28,6 @@ const MessageCard = forwardRef(({ name, message }, ref) => {
       </section>
     </div>
   );
-});
+};
 
 export default MessageCard;
