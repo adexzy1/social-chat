@@ -7,7 +7,9 @@ const WelcomeScreen = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(setUserName(username));
+    if (username !== '') {
+      dispatch(setUserName(username));
+    }
   };
 
   return (
