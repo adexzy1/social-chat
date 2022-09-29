@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header';
 import MessageForm from './components/MessageForm';
@@ -10,11 +10,16 @@ const App = () => {
   const { userName } = useSelector((state) => state.messages);
   const dispatch = useDispatch();
 
-  const handlelocalStorageChange = (e) => {
-    dispatch(updateMessages(e.newValue));
-  };
+  useEffect(() => {
+    const handlelocalStorageChange = (e) => {
+      dispatch(updateMessages(e.newValue));
+    };
 
-  window.addEventListener('storage', handlelocalStorageChange);
+    window.addEventListener('storage', handlelocalStorageChange);
+
+    return () =>
+      window.removeEventListener('storage', handlelocalStorageChange);
+  }, [dispatch]);
 
   return (
     <div className="bg-black min-h-screen">
